@@ -20,11 +20,11 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
-#      - name: Install Chrome browser
-#        uses: browser-actions/setup-chrome@latest
-#
-#      - name: Display Chrome version
-#        run: chrome --version
+      - name: Install Chrome browser
+        uses: browser-actions/setup-chrome@latest
+
+      - name: Display Chrome version
+        run: chrome --version
 
       - name: Run TestNG suite
         run: mvn clean test -DsuiteXmlFile=Testng/testng.xml
