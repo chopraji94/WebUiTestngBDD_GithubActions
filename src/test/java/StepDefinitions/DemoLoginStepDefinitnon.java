@@ -36,6 +36,7 @@ public class DemoLoginStepDefinitnon extends BaseSteps {
     @When("I enter valid user credentials")
     public void i_enter_valid_username() throws InterruptedException {
         String userName = System.getProperty("username");
+        System.out.println("Here is user name => "+userName);
         loginpageForDemo.enteruserName(userName);
         Thread.sleep(Duration.ofSeconds(5));
     }
