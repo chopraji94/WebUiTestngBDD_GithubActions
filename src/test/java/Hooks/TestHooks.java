@@ -107,7 +107,7 @@ public class TestHooks {
         options.addArguments("--disable-gpu");
         options.addArguments("--remote-allow-origins=*");
 
-        if(requireHeadless.equalsIgnoreCase("yes")){
+        if(requireHeadless.equalsIgnoreCase("true")){
             options.addArguments("--headless=new");
         }
 
