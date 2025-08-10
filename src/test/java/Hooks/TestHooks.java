@@ -32,6 +32,7 @@ public class TestHooks {
     private static ThreadLocal<ExtentTest> scenarioThread = new ThreadLocal<>();
     String platform;
     Properties properties;
+    String requireHeadless;
 
     @Before
     public void setUpBrowser(Scenario scenario) throws IOException {
@@ -48,6 +49,7 @@ public class TestHooks {
     public WebDriver setUpDriver() throws IOException {
         RemoteWebDriver _driver = null;
         String gridSetup = System.getProperty("gridSetup");
+        requireHeadless = System.getProperty("headlessEnable");
         String hubUrl = System.getenv("SELENIUM_HUB_URL");
         hubUrl = hubUrl != null ? hubUrl : "http://127.0.0.1:4444/wd/hub";
         platform = System.getProperty("os.name").toLowerCase().contains("windows") ? "Windows" : System.getProperty("os.name");
@@ -104,9 +106,10 @@ public class TestHooks {
         options.addArguments("--disable-gpu");
         options.addArguments("--remote-allow-origins=*");
 
-        if(!System.getProperty("os.name").equalsIgnoreCase("Windows 11")){
+        if(requireHeadless.equalsIgnoreCase("yes")){
             options.addArguments("--headless=new");
         }
+
         return options;
     }
 
