@@ -71,7 +71,7 @@ public class TestHooks {
                 options.setExperimentalOption("prefs",prefs);
 
                 if(gridSetup==null||gridSetup.equalsIgnoreCase("")||gridSetup.equalsIgnoreCase("No")){
-                    _driver = new ChromeDriver();
+                    _driver = new ChromeDriver(options);
                 }
                 else {
                     System.out.println("Running on grid");
@@ -104,7 +104,6 @@ public class TestHooks {
         options.addArguments("--disable-dev-shm-usage");
         options.addArguments("--disable-gpu");
         options.addArguments("--remote-allow-origins=*");
-        options.addArguments("--user-data-dir=/tmp/chrome-profile");
         return options;
     }
 
