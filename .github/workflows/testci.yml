@@ -30,6 +30,7 @@ jobs:
         run: mvn clean test -DsuiteXmlFile=Testng/userInputTestng.xml
 
       - name: Upload Extent Report
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: ExtentReport
