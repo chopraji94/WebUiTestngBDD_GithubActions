@@ -50,7 +50,7 @@ public class TestHooks {
         String gridSetup = System.getProperty("gridSetup");
         String hubUrl = System.getenv("SELENIUM_HUB_URL");
         hubUrl = hubUrl != null ? hubUrl : "http://127.0.0.1:4444/wd/hub";
-        platform = System.getProperty("os.name");
+        platform = System.getProperty("os.name").toLowerCase().contains("windows") ? "Windows" : System.getProperty("os.name");
 
         String browser = getBrowser();
         switch (browser){
@@ -99,7 +99,6 @@ public class TestHooks {
         options.addArguments("--disable-infobars");
         options.addArguments("--disable-notifications");
         options.addArguments("--disable-extensions");
-        options.addArguments("--headless=new");  // Modern headless mode
         options.addArguments("--no-sandbox");
         options.addArguments("--disable-dev-shm-usage");
         options.addArguments("--disable-gpu");

@@ -27,7 +27,7 @@ jobs:
         run: chrome --version
 
       - name: Run TestNG suite
-        run: mvn clean test -DsuiteXmlFile=Testng/userInputTestng.xml
+        run: mvn clean test -DsuiteXmlFile=Testng/testng.xml
 
       - name: Upload Extent Report
         if: always()
