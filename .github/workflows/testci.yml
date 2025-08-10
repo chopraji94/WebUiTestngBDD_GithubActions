@@ -27,4 +27,4 @@ jobs:
         run: chrome --version
 
       - name: Run TestNG suite
-        run: mvn clean test -DsuiteXmlFile=Testng\testng.xml
+        run: mvn clean test -DsuiteXmlFile=Testng/testng.xml
