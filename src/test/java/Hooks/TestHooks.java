@@ -103,7 +103,10 @@ public class TestHooks {
         options.addArguments("--disable-dev-shm-usage");
         options.addArguments("--disable-gpu");
         options.addArguments("--remote-allow-origins=*");
-        options.addArguments("--headless=new");
+
+        if(!System.getProperty("os.name").equalsIgnoreCase("Windows 11")){
+            options.addArguments("--headless=new");
+        }
         return options;
     }
 
