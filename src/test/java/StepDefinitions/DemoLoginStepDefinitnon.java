@@ -35,7 +35,7 @@ public class DemoLoginStepDefinitnon extends BaseSteps {
 
     @When("I enter valid user credentials")
     public void i_enter_valid_username() throws InterruptedException {
-        String userName = properties.getProperty("username");
+        String userName = System.getProperty("username");
         loginpageForDemo.enteruserName(userName);
         Thread.sleep(Duration.ofSeconds(5));
     }
@@ -48,7 +48,7 @@ public class DemoLoginStepDefinitnon extends BaseSteps {
 
     @When("I enter valid user password")
     public void i_enter_valid_user_password() throws InterruptedException {
-        String password = properties.getProperty("password");
+        String password = System.getProperty("password");
         loginpageForDemo.enterPassword(password);
         Thread.sleep(Duration.ofSeconds(5));
     }
