@@ -1,0 +1,78 @@
+# File: .github/workflows/selenium-testng-manual.yml
+name: Selenium User Input TestNG Manual Run (Grid - Chrome Only)
+
+on:
+  workflow_dispatch:
+    inputs:
+      headlessOption:
+        description: "Run test with headless option"
+        required: true
+        default: "yes"
+        type: choice
+        options:
+          - yes
+          - no
+      gridOption:
+        description: "Run on selenium grid"
+        required: true
+        default: "yes"
+        type: choice
+        options:
+          - yes
+          - no
+
+jobs:
+  test:
+    name: Run Selenium TestNG Tests on Grid (Chrome)
+    runs-on: ubuntu-latest
+
+    services:
+      selenium-hub:
+        image: selenium/hub:latest
+        ports:
+          - 4444:4444
+
+      chrome-node:
+        image: selenium/node-chrome:latest
+        depends_on:
+          - selenium-hub
+        env:
+          SE_EVENT_BUS_HOST: selenium-hub
+          SE_EVENT_BUS_PUBLISH_PORT: 4442
+          SE_EVENT_BUS_SUBSCRIBE_PORT: 4443
+        options: >-
+          --shm-size="2g"
+
+    env:
+      HEAD_LESS: ${{ github.event.inputs.headlessOption }}
+      GRID: ${{ github.event.inputs.gridOption }}
+
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v3
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v3
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: maven
+
+      - name: Wait for Selenium Hub to be ready
+        run: |
+          echo "Waiting for Selenium Hub..."
+          until curl -s http://localhost:4444/wd/hub/status | grep -q '"ready":true'; do
+            echo -n "."
+            sleep 1
+          done
+          echo "Selenium Hub is ready."
+
+      - name: Run TestNG suite
+        run: mvn clean test -DsuiteXmlFile=Testng/testng.xml -DheadlessEnable=${HEAD_LESS} -DgridSetup=${GRID}
+
+      - name: Upload Extent Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ExtentReport
+          path: target/extent-report/Report_*.html
