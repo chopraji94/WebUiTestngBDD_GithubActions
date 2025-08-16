@@ -63,6 +63,7 @@ public class DemoLoginStepDefinitnon extends BaseSteps {
     @Then("I verify {string} is displayed after succesfull login")
     public void i_verify_is_after_succesfull_login(String succcesfulltext) {
         String text = loggedInpage.getSuccessFullMessage();
+        System.out.print("The text message is =>>>>>>>> "+text);
         Assert.assertEquals(text, succcesfulltext);
     }
 
