@@ -56,14 +56,14 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
-      - name: Wait for Selenium Hub to be ready
-        run: |
-          echo "Waiting for Selenium Hub..."
-          until curl -s http://localhost:4444/wd/hub/status | grep -q '"ready":true'; do
-            echo -n "."
-            sleep 1
-          done
-          echo "Selenium Hub is ready."
+#      - name: Wait for Selenium Hub to be ready
+#        run: |
+#          echo "Waiting for Selenium Hub..."
+#          until curl -s http://localhost:4444/wd/hub/status | grep -q '"ready":true'; do
+#            echo -n "."
+#            sleep 1
+#          done
+#          echo "Selenium Hub is ready."
 
       - name: Run TestNG suite
         run: mvn clean test -DsuiteXmlFile=Testng/testng.xml -DheadlessEnable=${HEAD_LESS} -DgridSetup=${GRID}
