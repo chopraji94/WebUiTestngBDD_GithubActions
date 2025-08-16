@@ -51,6 +51,7 @@ public class TestHooks {
         String gridSetup = System.getProperty("gridSetup");
         requireHeadless = System.getProperty("headlessEnable");
         System.out.println("Print here ================> "+requireHeadless);
+        System.out.println("Print here grid ================> "+gridSetup);
         String hubUrl = System.getenv("SELENIUM_HUB_URL");
         hubUrl = hubUrl != null ? hubUrl : "http://127.0.0.1:4444/wd/hub";
         platform = System.getProperty("os.name").toLowerCase().contains("windows") ? "Windows" : System.getProperty("os.name");
